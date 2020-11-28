@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return Inertia\Inertia::render('Home/Index');
+})->name('home');
+
+Route::get('/pronostique', [\App\Http\Controllers\PronosticController::class, 'index'])->name('pronostic');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
+    return Inertia\Inertia::render('Home/Index');
 })->name('dashboard');
