@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,24 +22,13 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'remember_token'
     ];
 
     /**
@@ -59,13 +49,22 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected $guarded = [];
+
     public function pronostic(): HasOne
     {
         return $this->hasOne(Pronostic::class);
     }
 
-    public function initPronostic() {
-
+    public function newPronostic(): Pronostic {
+        $pronostic = new Pronostic();
+        $pronostic->status = 'Draft';
+        $pronostic->season = '2020-21';
+        $this->pronostic()->save($pronostic);
+        $pronostic->initDetails();
+        return $pronostic;
     }
+
+
 
 }

@@ -2639,7 +2639,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['href', 'active'],
   computed: {
     classes: function classes() {
-      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-orange-600 text-sm font-medium leading-5 text-orange-600 focus:outline-none focus:border-orange-600 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-orange-400 hover:border-orange-400 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
+      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-orange-500 text-sm font-medium leading-5 text-orange-500 focus:outline-none focus:border-orange-500 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-200 hover:text-orange-400 hover:border-orange-400 focus:outline-none focus:text-gray-700 focus:border-gray-200 transition duration-150 ease-in-out';
     }
   }
 });
@@ -2832,34 +2832,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
 /* harmony import */ var _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/NavLink */ "./resources/js/Jetstream/NavLink.vue");
 /* harmony import */ var _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ResponsiveNavLink */ "./resources/js/Jetstream/ResponsiveNavLink.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3403,6 +3375,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4318,6 +4303,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4325,10 +4311,10 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     WinLoss: _WinLoss__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['teams'],
+  props: ['pronostic'],
   data: function data() {
     return {
-      teamsByConf: this.teams
+      pronostic: this.pronostic
     };
   }
 });
@@ -47186,25 +47172,37 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "hidden flex ml-auto p-3" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-orange-600 p-1",
-                  attrs: { href: _vm.route("login") }
-                },
-                [_vm._v("Connection")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-orange-400 p-1",
-                  attrs: { href: _vm.route("register") }
-                },
-                [_vm._v("Inscription")]
-              )
-            ]),
+            !_vm.$page.user
+              ? _c("div", { staticClass: "flex ml-auto p-3" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "p-2 m-1 rounded bg-orange-400 shadow border-1 border-white text-white",
+                      attrs: { href: _vm.route("register") }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Inscription\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "p-2 m-1 rounded bg-orange-500 shadow border-1 border-white text-white",
+                      attrs: { href: _vm.route("login") }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Connection\n                    "
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "div",
@@ -47220,7 +47218,62 @@ var render = function() {
                         {
                           key: "trigger",
                           fn: function() {
-                            return undefined
+                            return [
+                              _vm.$page.jetstream.managesProfilePhotos
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass:
+                                          "h-8 w-8 rounded-full object-cover",
+                                        attrs: {
+                                          src: _vm.$page.user.profile_photo_url,
+                                          alt: _vm.$page.user.name
+                                        }
+                                      })
+                                    ]
+                                  )
+                                : _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                                    },
+                                    [
+                                      _c("div", [
+                                        _vm._v(_vm._s(_vm.$page.user.name))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "ml-1" }, [
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "fill-current h-4 w-4",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 20 20"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                "fill-rule": "evenodd",
+                                                d:
+                                                  "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
+                                                "clip-rule": "evenodd"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                            ]
                           },
                           proxy: true
                         },
@@ -47270,44 +47323,6 @@ var render = function() {
                               _c("div", {
                                 staticClass: "border-t border-gray-100"
                               }),
-                              _vm._v(" "),
-                              _vm.$page.jetstream.hasTeamFeatures
-                                ? [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "block px-4 py-2 text-xs text-gray-400"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Manage Team\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "border-t border-gray-100"
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "block px-4 py-2 text-xs text-gray-400"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Switch Teams\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "border-t border-gray-100"
-                                    })
-                                  ]
-                                : _vm._e(),
                               _vm._v(" "),
                               _c(
                                 "form",
@@ -47502,16 +47517,20 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("main", { staticClass: "bg-gray-300" }, [
+      _c("main", { staticClass: "bg-gray-100" }, [
         _c(
           "div",
           {
-            staticClass: "bg-white mx-auto",
+            staticClass: "bg-white mx-auto pt-2",
             staticStyle: { "max-width": "1480px" }
           },
           [_vm._t("default")],
           2
         )
+      ]),
+      _vm._v(" "),
+      _c("footer", { staticClass: "bg-black text-center" }, [
+        _vm._v("\n        Ceci Sera le footer\n    ")
       ]),
       _vm._v(" "),
       _c("portal-target", { attrs: { name: "modal", multiple: "" } })
@@ -48232,9 +48251,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-2/3 p-3 mx-auto bg-gray-100 rounded" }, [
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "div",
+          { staticClass: "flex md:flex-row mx-auto w-1/2 justify-around" },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "p-2 m-1 rounded bg-orange-400 shadow border-1 border-white text-white"
+              },
+              [_vm._v("\n                Inscription\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "p-2 m-1 rounded bg-orange-500 shadow border-1 border-white text-white"
+              },
+              [_vm._v("\n                Connexion\n            ")]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -49626,97 +49678,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "app-layout",
-    {
-      scopedSlots: _vm._u([
-        {
-          key: "header",
-          fn: function() {
-            return [
-              _c("h2", {
-                staticClass: "font-semibold text-xl text-gray-800 leading-tight"
+  return _c("app-layout", [
+    _c("div", { staticClass: "px-6 py-2" }, [
+      _c(
+        "div",
+        { staticClass: "flex flex-wrap" },
+        _vm._l(_vm.pronostic, function(teams, conference) {
+          return _c(
+            "div",
+            { key: conference, staticClass: "md:w-1/2 sm:w-100 px-2" },
+            [
+              _c("h3", { staticClass: "text-center text-3xl" }, [
+                _vm._v(_vm._s(conference))
+              ]),
+              _vm._v(" "),
+              _c("hr", { staticClass: "w-1/2 mx-auto mb-2 border-orange-500" }),
+              _vm._v(" "),
+              _vm._l(teams, function(team, index) {
+                return _c("div", { key: team.id }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "p-1 flex justify-around items-center rounded bg-white shadow mb-1"
+                    },
+                    [
+                      _c("div", { staticClass: "text-2xl w-1/6 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("img", {
+                          staticClass: "rounded",
+                          attrs: {
+                            src:
+                              "/img/NBATeams/" +
+                              conference +
+                              "/" +
+                              team.tricode +
+                              ".png",
+                            alt: "Logo des " + team.name,
+                            width: "33",
+                            height: "33"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-4 lg:hidden md:block" }, [
+                        _vm._v(_vm._s(team.tricode))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "lg:ml-2 hidden lg:block" }, [
+                        _vm._v(_vm._s(team.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("WinLoss", { attrs: { team: team } })
+                    ],
+                    1
+                  )
+                ])
               })
-            ]
-          },
-          proxy: true
-        }
-      ])
-    },
-    [
+            ],
+            2
+          )
+        }),
+        0
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "px-6 py-2" }, [
+      _c("div", { staticClass: "text-center p-1" }, [
         _c(
-          "div",
-          { staticClass: "flex flex-wrap" },
-          _vm._l(_vm.teamsByConf, function(teams, conference) {
-            return _c(
-              "div",
-              { key: conference, staticClass: "md:w-1/2 sm:w-100 px-2" },
-              [
-                _c("h3", { staticClass: "text-center text-3xl" }, [
-                  _vm._v(_vm._s(conference))
-                ]),
-                _vm._v(" "),
-                _c("hr", {
-                  staticClass: "w-1/2 mx-auto mb-2 border-orange-600"
-                }),
-                _vm._v(" "),
-                _vm._l(teams, function(team, index) {
-                  return _c("div", { key: team.id }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "p-1 flex justify-around items-center rounded bg-white shadow mb-1"
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "text-2xl w-1/6 text-center" },
-                          [_vm._v(_vm._s(index + 1))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("img", {
-                            staticClass: "rounded",
-                            attrs: {
-                              src:
-                                "/img/NBATeams/" +
-                                conference +
-                                "/" +
-                                team.tricode +
-                                ".png",
-                              alt: "Logo des " + team.name,
-                              width: "33",
-                              height: "33"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "ml-4 lg:hidden md:block" }, [
-                          _vm._v(_vm._s(team.tricode))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "lg:ml-2 hidden lg:block" }, [
-                          _vm._v(_vm._s(team.name))
-                        ]),
-                        _vm._v(" "),
-                        _c("WinLoss", { attrs: { team: team } })
-                      ],
-                      1
-                    )
-                  ])
-                })
-              ],
-              2
-            )
-          }),
-          0
+          "button",
+          {
+            staticClass:
+              "p-2 rounded bg-orange-400 shadow border-1 border-white text-white"
+          },
+          [_vm._v("\n                Terminer\n            ")]
         )
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

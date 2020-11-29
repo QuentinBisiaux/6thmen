@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NBATeams;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class PronosticController extends Controller
 {
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        if(null /** User doesn't have a pronostic */) {
+        $user = $request->user();
+        if($user->has('pronostic')->get()->isEmpty()) {
             //Create new Pronostic
-            //$pronostic = User->initPronostic()
+            $pronostic = $user->newPronostic();
         } else{
             //Get User's Pronostic
-            //$pronostic = User->getPronostic()
+            $pronostic = $user->pronostic()
+                ->with(['details', 'details.team'])
+                ->orderBy('conference', 'DESC')->orderBy('wins', 'DESC')->orderBy('team.name')
+                ->get();
         }
         //Organize Pronostic
-        $teams = NBATeams::getByConference();
-        return Inertia::render('Pronostic/Index', ['teams' => $teams]);
+        dump($pronostic);
+
+        return Inertia::render('Pronostic/Index', ['pronostic' => $pronostic]);
     }
 }

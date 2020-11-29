@@ -15,11 +15,10 @@ class CreatePronosticsTable extends Migration
     {
         Schema::create('pronostics', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userPronostic_id');
-            $table->unsignedBigInteger('NBATeam_id');
-            $table->integer('wins');
-            $table->foreign('NBATeam_id')->references('id')->on('NBATeams');
-            $table->foreign('userPronostic_id')->references('id')->on('userPronostic');
+            $table->string('status');
+            $table->string('season');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

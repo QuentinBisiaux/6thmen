@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class NBATeams extends Model
 {
@@ -23,6 +24,11 @@ class NBATeams extends Model
             $teamsByConference[$team->conference][] = $team;
         }
         return $teamsByConference;
+    }
+
+    public function pronosticDetails(): HasMany
+    {
+        return $this->hasMany(PronosticDetails::class, 'NBATeam_id');
     }
 
 

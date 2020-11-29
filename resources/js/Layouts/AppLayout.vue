@@ -34,9 +34,13 @@
                         </div>
                     </div>
 
-                    <div class="hidden flex ml-auto p-3">
-                        <a class="btn btn-orange-600 p-1" :href="route('login')">Connection</a>
-                        <a class="btn btn-orange-400 p-1" :href="route('register')">Inscription</a>
+                    <div class="flex ml-auto p-3" v-if="!$page.user">
+                        <a class="p-2 m-1 rounded bg-orange-400 shadow border-1 border-white text-white" :href="route('register')">
+                            Inscription
+                        </a>
+                        <button class="p-2 m-1 rounded bg-orange-500 shadow border-1 border-white text-white" :href="route('login')">
+                            Connection
+                        </button>
                     </div>
 
                     <!-- Settings Dropdown -->
@@ -44,7 +48,7 @@
                         <div class="ml-3 relative">
                             <jet-dropdown align="right" width="48">
                                 <template #trigger>
-                                    <!--<button v-if="$page.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                    <button v-if="$page.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                                         <img class="h-8 w-8 rounded-full object-cover" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
                                     </button>
 
@@ -56,7 +60,7 @@
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                    </button>-->
+                                    </button>
                                 </template>
 
                                 <template #content>
@@ -75,41 +79,6 @@
 
                                     <div class="border-t border-gray-100"></div>
 
-                                    <!-- Team Management -->
-                                    <template v-if="$page.jetstream.hasTeamFeatures">
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Team
-                                        </div>
-
-                                        <!-- Team Settings -->
-                                        <!--  <jet-dropdown-link :href="route('teams.show', $page.user.current_team)">
-                                              Team Settings
-                                          </jet-dropdown-link>-->
-
-                                        <!--<jet-dropdown-link :href="route('teams.create')" v-if="$page.jetstream.canCreateTeams">
-                                            Create New Team
-                                        </jet-dropdown-link>-->
-
-                                        <div class="border-t border-gray-100"></div>
-
-                                        <!-- Team Switcher -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Switch Teams
-                                        </div>
-
-                                        <!--<template v-for="team in $page.user.all_teams">
-                                            <form @submit.prevent="switchToTeam(team)" :key="team.id">
-                                                <jet-dropdown-link as="button">
-                                                    <div class="flex items-center">
-                                                        <svg v-if="team.id == $page.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                        <div>{{ team.name }}</div>
-                                                    </div>
-                                                </jet-dropdown-link>
-                                            </form>
-                                        </template>-->
-
-                                        <div class="border-t border-gray-100"></div>
-                                    </template>
 
                                     <!-- Authentication -->
                                     <form @submit.prevent="logout">
@@ -187,11 +156,14 @@
         </header> -->
 
         <!-- Page Content -->
-        <main class="bg-gray-300">
-            <div class="bg-white mx-auto" style="max-width: 1480px">
+        <main class="bg-gray-100">
+            <div class="bg-white mx-auto pt-2" style="max-width: 1480px">
                 <slot></slot>
             </div>
         </main>
+        <footer class="bg-black text-center">
+            Ceci Sera le footer
+        </footer>
 
         <!-- Modal Portal -->
         <portal-target name="modal" multiple>
